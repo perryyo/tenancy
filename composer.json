@@ -1,0 +1,29 @@
+{
+    "name": "tenancy/tenancy",
+    "description": "Creating multi tenant saas from your Laravel app with ease",
+    "keywords": ["laravel", "multi-tenant", "saas", "tenancy", "aws", "gce"],
+    "license": "mit",
+    "require": {
+        "laravel/framework": "5.5.*"
+    },
+    "require-dev": {
+        "laravel/laravel": "5.5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tenancy\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tenancy\\Tests\\": "test/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniël Klabbers",
+            "email": "daniel@klabbers.email",
+            "homepage": "http://luceos.com"
+        }
+    ]
+}

@@ -2,7 +2,7 @@
     "name": "tenancy/tenancy",
     "description": "Creating multi tenant saas from your Laravel app with ease",
     "keywords": ["laravel", "multi-tenant", "saas", "tenancy", "aws", "gce"],
-    "license": "mit",
+    "license": "MIT",
     "require": {
         "laravel/framework": "5.5.*"
     },

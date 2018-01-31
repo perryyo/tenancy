@@ -2,21 +2,38 @@
 
 namespace Tenancy\Identification;
 
+use Illuminate\Contracts\Foundation\Application;
 use Tenancy\Contracts\IdentifiesTenant;
 use Tenancy\Contracts\Tenant;
 
 class Delegation
 {
+
+    /**
+     * @var Application
+     */
+    private $app;
+
     /**
      * The registered services to help identify tenants.
      *
-     * @var array
+     * @var array|string[]
      */
     protected static $services = [];
 
-    public static function registerIdentificationService(IdentifiesTenant $service)
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
+
+    public static function registerIdentificationService(string $service)
     {
         static::$services[] = $service;
+    }
+
+    public static function getIdentificationServices(): array
+    {
+        return static::$services;
     }
 
     public function identify(): ?Tenant
@@ -24,6 +41,11 @@ class Delegation
         $tenant = null;
 
         collect(static::$services)
+            ->mapWithKeys(function (string $service) {
+                return [
+                    $service => $this->app->make($service)
+                ];
+            })
             ->sortBy(function (IdentifiesTenant $service) {
                 return $service->priority();
             })

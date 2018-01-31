@@ -25,5 +25,15 @@
             "email": "daniel@klabbers.email",
             "homepage": "http://luceos.com"
         }
-    ]
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tenancy\\Providers\\TenancyProvider"
+            ],
+            "aliases": {
+                "Tenancy": "Tenancy\\Facades\\TenancyFacade"
+            }
+        }
+    }
 }

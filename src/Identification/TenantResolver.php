@@ -5,7 +5,7 @@ namespace Tenancy\Identification;
 use Illuminate\Contracts\Events\Dispatcher;
 use Tenancy\Contracts\IdentifiableAsTenant;
 
-class Resolver
+class TenantResolver
 {
     /**
      * @var Dispatcher

@@ -49,7 +49,7 @@ class Environment
     public static function getIdentificationResolver()
     {
         if (! static::$identificationResolver) {
-            static::$identificationResolver = resolve(Identification\Resolver::class);
+            static::$identificationResolver = resolve(Identification\TenantResolver::class);
         }
 
         return static::$identificationResolver;

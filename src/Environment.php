@@ -16,6 +16,7 @@ namespace Tenancy;
 
 use Illuminate\Contracts\Foundation\Application;
 use Tenancy\Contracts\IdentifiableAsTenant;
+use Tenancy\Contracts\ResolvesTenants;
 
 class Environment
 {
@@ -31,6 +32,9 @@ class Environment
      */
     private $app;
 
+    /**
+     * @var ResolvesTenants
+     */
     protected static $identificationResolver;
 
     public function __construct(Application $app)
@@ -58,7 +62,7 @@ class Environment
         return $this->tenant;
     }
 
-    public static function getIdentificationResolver()
+    public static function getIdentificationResolver(): ResolvesTenants
     {
         if (! static::$identificationResolver) {
             static::$identificationResolver = resolve(Identification\TenantResolver::class);
@@ -67,7 +71,7 @@ class Environment
         return static::$identificationResolver;
     }
 
-    public static function setIdentificationResolver($resolver)
+    public static function setIdentificationResolver(ResolvesTenants $resolver)
     {
         static::$identificationResolver = $resolver;
     }

@@ -16,8 +16,9 @@ namespace Tenancy\Identification;
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Tenancy\Contracts\IdentifiableAsTenant;
+use Tenancy\Contracts\ResolvesTenants;
 
-class TenantResolver
+class TenantResolver implements ResolvesTenants
 {
     /**
      * @var Dispatcher
@@ -35,6 +36,10 @@ class TenantResolver
 
         if ($tenant) {
             $this->events->dispatch(new Events\Identified($tenant));
+        }
+
+        if (! $tenant) {
+            $this->events->dispatch(new Events\NothingIdentified($tenant));
         }
 
         $this->events->dispatch(new Events\Resolved($tenant));

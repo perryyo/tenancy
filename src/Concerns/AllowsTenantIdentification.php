@@ -14,7 +14,7 @@
 
 namespace Tenancy\Concerns;
 
-trait IdentifiableAsTenant
+trait AllowsTenantIdentification
 {
     /**
      * The attribute of the Model to use for the key.

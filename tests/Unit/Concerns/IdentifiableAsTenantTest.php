@@ -16,8 +16,8 @@ namespace Tenancy\Tests\Unit\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use ReflectionClass;
-use Tenancy\Concerns\IdentifiableAsTenant as Concern;
-use Tenancy\Contracts\IdentifiableAsTenant as Contract;
+use Tenancy\Concerns\AllowsTenantIdentification;
+use Tenancy\Contracts\IdentifiableAsTenant;
 use Tenancy\Tests\TestCase;
 
 class IdentifiableAsTenantTest extends TestCase
@@ -27,7 +27,7 @@ class IdentifiableAsTenantTest extends TestCase
     protected function afterSetUp()
     {
         $this->class = new class() extends Model {
-            use Concern;
+            use AllowsTenantIdentification;
         };
     }
 
@@ -37,12 +37,12 @@ class IdentifiableAsTenantTest extends TestCase
     public function has_required_methods()
     {
         $has = collect((new ReflectionClass($this->class))->getMethods())->pluck('name');
-        $needs = collect((new ReflectionClass(Contract::class))->getMethods())->pluck('name');
+        $needs = collect((new ReflectionClass(IdentifiableAsTenant::class))->getMethods())->pluck('name');
 
         $this->assertCount(
             $needs->count(),
             $has->intersect($needs),
-            Concern::class.' does not implement all required interface methods from '.Contract::class
+            AllowsTenantIdentification::class.' does not implement all required interface methods from '.IdentifiableAsTenant::class
         );
     }
 }

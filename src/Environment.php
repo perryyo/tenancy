@@ -71,4 +71,16 @@ class Environment
     {
         static::$identificationResolver = $resolver;
     }
+
+    public function isIdentified(): bool
+    {
+        return $this->identified;
+    }
+
+    public function setIdentified(bool $identified)
+    {
+        $this->identified = $identified;
+
+        return $this;
+    }
 }

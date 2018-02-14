@@ -19,17 +19,33 @@ use Tenancy\Environment;
 
 class TenancyProvider extends ServiceProvider
 {
+    use Provides\ProvidesConfig,
+        Provides\ProvidesMiddleware,
+        Provides\ProvidesMigrations,
+        Provides\ProvidesServices;
+
     protected $defer = true;
+
+    public $singletons = [
+        Environment::class => Environment::class
+    ];
 
     public function register()
     {
-        $this->app->singleton(Environment::class);
+        $this->bootTenantTraits();
     }
 
-    public function provides()
+    protected function bootTenantTraits()
     {
-        return [
-            Environment::class
-        ];
+        $class = static::class;
+
+        foreach (class_uses_recursive($class) as $trait) {
+            if (method_exists($class, $method = 'boot'.class_basename($trait))) {
+                call_user_func([$this, $method]);
+            }
+            if (method_exists($class, $method = 'servicesOf'.class_basename($trait))) {
+                $this->providesServices = array_merge($this->providesServices, call_user_func([$this, $method]));
+            }
+        }
     }
 }

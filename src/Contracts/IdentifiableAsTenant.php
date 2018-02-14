@@ -16,11 +16,32 @@ namespace Tenancy\Contracts;
 
 interface IdentifiableAsTenant
 {
+    /**
+     * The attribute of the Model to use for the key.
+     *
+     * @return string
+     */
     public function getTenantKeyName(): string;
 
+
+    /**
+     * The actual value of the key for the tenant Model.
+     *
+     * @return mixed
+     */
     public function getTenantKey();
 
-    public function getTenantIdentifierName(): string;
+    /**
+     * The value type of the key.
+     *
+     * @return string
+     */
+    public function getTenantKeyType(): string;
 
-    public function getTenantIdentifier();
+    /**
+     * A unique identifier, eg class or table to distinguish this tenant Model.
+     *
+     * @return string
+     */
+    public function getTenantIdentifier(): string;
 }

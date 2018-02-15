@@ -15,8 +15,8 @@
 namespace Tenancy\Identification;
 
 use Illuminate\Contracts\Events\Dispatcher;
-use Tenancy\Contracts\IdentifiableAsTenant;
-use Tenancy\Contracts\ResolvesTenants;
+use Tenancy\Identification\Contracts\IdentifiableAsTenant;
+use Tenancy\Identification\Contracts\ResolvesTenants;
 
 class TenantResolver implements ResolvesTenants
 {

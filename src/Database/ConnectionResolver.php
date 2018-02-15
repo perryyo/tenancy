@@ -15,10 +15,11 @@
 namespace Tenancy\Database;
 
 use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Database\ConnectionInterface;
-use Tenancy\Contracts\IdentifiableAsTenant;
+use Tenancy\Database\Contracts\ProvidesDatabaseDriver;
+use Tenancy\Database\Contracts\ResolvesConnections;
+use Tenancy\Identification\Contracts\IdentifiableAsTenant;
 
-class ConnectionResolver
+class ConnectionResolver implements ResolvesConnections
 {
     /**
      * @var Dispatcher
@@ -30,16 +31,16 @@ class ConnectionResolver
         $this->events = $events;
     }
 
-    public function __invoke(IdentifiableAsTenant $tenant): ?ConnectionInterface
+    public function __invoke(IdentifiableAsTenant $tenant): ?ProvidesDatabaseDriver
     {
-        $connection = $this->events->until(new Events\Resolving($tenant));
+        $provider = $this->events->until(new Events\Resolving($tenant));
 
-        if ($connection) {
-            $this->events->dispatch(new Events\Identified($tenant, $connection));
+        if ($provider) {
+            $this->events->dispatch(new Events\Identified($tenant, $provider));
         }
 
-        $this->events->dispatch(new Events\Resolved($tenant, $connection));
+        $this->events->dispatch(new Events\Resolved($tenant, $provider));
 
-        return $connection;
+        return $provider;
     }
 }

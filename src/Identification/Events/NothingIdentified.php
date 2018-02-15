@@ -14,7 +14,7 @@
 
 namespace Tenancy\Identification\Events;
 
-use Tenancy\Contracts\IdentifiableAsTenant;
+use Tenancy\Identification\Contracts\IdentifiableAsTenant;
 
 class NothingIdentified
 {

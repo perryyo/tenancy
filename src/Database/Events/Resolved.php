@@ -14,8 +14,8 @@
 
 namespace Tenancy\Database\Events;
 
-use Illuminate\Database\ConnectionInterface;
-use Tenancy\Contracts\IdentifiableAsTenant;
+use Tenancy\Database\Contracts\ProvidesDatabaseDriver;
+use Tenancy\Identification\Contracts\IdentifiableAsTenant;
 
 class Resolved
 {
@@ -24,13 +24,13 @@ class Resolved
      */
     public $tenant;
     /**
-     * @var ConnectionInterface
+     * @var ProvidesDatabaseDriver
      */
-    public $connection;
+    public $provider;
 
-    public function __construct(IdentifiableAsTenant $tenant, ConnectionInterface &$connection = null)
+    public function __construct(IdentifiableAsTenant $tenant, ProvidesDatabaseDriver &$provider = null)
     {
         $this->tenant = $tenant;
-        $this->connection = &$connection;
+        $this->provider = &$provider;
     }
 }

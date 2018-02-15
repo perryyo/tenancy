@@ -16,8 +16,8 @@ namespace Tenancy\Tests\Unit\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use ReflectionClass;
-use Tenancy\Concerns\AllowsTenantIdentification;
-use Tenancy\Contracts\IdentifiableAsTenant;
+use Tenancy\Identification\Concerns\AllowsTenantIdentification;
+use Tenancy\Identification\Contracts\IdentifiableAsTenant;
 use Tenancy\Tests\TestCase;
 
 class IdentifiableAsTenantTest extends TestCase

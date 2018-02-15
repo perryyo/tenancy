@@ -14,6 +14,8 @@
 
 namespace Tenancy\Database\Events\Drivers;
 
+use Tenancy\Database\Contracts\ProvidesDatabaseDriver;
+
 class Configuring
 {
     /**
@@ -25,10 +27,15 @@ class Configuring
      * @var array
      */
     public $configuration;
+    /**
+     * @var ProvidesDatabaseDriver
+     */
+    public $provider;
 
-    public function __construct(string $name, array $configuration)
+    public function __construct(string $name, array $configuration, ProvidesDatabaseDriver $provider)
     {
         $this->name = $name;
         $this->configuration = $configuration;
+        $this->provider = $provider;
     }
 }

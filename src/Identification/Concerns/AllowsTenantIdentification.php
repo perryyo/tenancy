@@ -12,7 +12,7 @@
  * @see https://github.com/tenancy
  */
 
-namespace Tenancy\Concerns;
+namespace Tenancy\Identification\Concerns;
 
 trait AllowsTenantIdentification
 {

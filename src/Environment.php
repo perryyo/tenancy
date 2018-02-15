@@ -15,8 +15,8 @@
 namespace Tenancy;
 
 use Illuminate\Contracts\Foundation\Application;
-use Tenancy\Contracts\IdentifiableAsTenant;
-use Tenancy\Contracts\ResolvesTenants;
+use Tenancy\Identification\Contracts\IdentifiableAsTenant;
+use Tenancy\Identification\Contracts\ResolvesTenants;
 
 class Environment
 {

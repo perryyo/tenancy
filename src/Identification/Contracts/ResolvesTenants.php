@@ -12,7 +12,7 @@
  * @see https://github.com/tenancy
  */
 
-namespace Tenancy\Contracts;
+namespace Tenancy\Identification\Contracts;
 
 interface ResolvesTenants
 {

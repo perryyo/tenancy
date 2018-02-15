@@ -14,7 +14,7 @@
 
 namespace Tenancy\Database\Events;
 
-use Tenancy\Contracts\IdentifiableAsTenant;
+use Tenancy\Identification\Contracts\IdentifiableAsTenant;
 
 class Resolving
 {
